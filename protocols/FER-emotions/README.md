@@ -35,5 +35,7 @@
 
 ---
 [1] Lucey, P., Cohn, J. F., Kanade, T., Saragih, J., Ambadar, Z., & Matthews, I. (2010). The Extended Cohn-Kanade Dataset (CK+): A complete dataset for action unit and emotion-specified expression. In 2010 IEEE Computer Society Conference on Computer Vision and Pattern Recognition - Workshops (pp. 94–101). IEEE. [https://doi.org/10.1109/CVPRW.2010.5543262](https://doi.org/10.1109/CVPRW.2010.5543262)
+
 [2] Cohn, J. F., Ambadar, Z., & Ekman, P. (2007). Observer-based measurement of facial expression with the Facial Action Coding System. The Handbook of Emotion Elicitation and Assessment, 203–221.
+
 [3] Ekman, P., & Rosenberg, E. L. (1997). What the face reveals: Basic and applied studies of spontaneous expression using the Facial Action Coding System (FACS). Oxford University Press, USA.
