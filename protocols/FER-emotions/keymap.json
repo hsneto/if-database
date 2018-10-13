@@ -1,0 +1,11 @@
+{
+  "neutral"   : "n",
+  "angry"     : "a",
+  "contempt"  : "c",
+  "disgust"   : "d",
+  "fear"      : "f",
+  "happy"     : "h",
+  "sad"       : "s",
+  "surprise"  : "u",
+  "quit"      : "q"
+}
