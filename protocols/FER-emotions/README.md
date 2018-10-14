@@ -13,7 +13,7 @@
     * Repeat 3x
     * [```display.py```](dataset-display/display.py)
 
-## Data label:
+## Data label
 
 ### Discard when capturing images:
 
