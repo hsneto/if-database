@@ -1,4 +1,2 @@
 .vscode
-
-# emotions_protocol
-protocols/FER-emotions/__pycache__
+__pycache__

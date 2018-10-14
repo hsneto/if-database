@@ -1,0 +1,60 @@
+{
+  "config" : {
+    "output_width" : 640,
+    "output_height": null
+  },
+
+  "datasets": {
+    "ce" : {
+      "dir" : "/home/hsneto/Documents/datasets/ce/ce_database/Identities/",
+      "multiple_folder" : true,
+      "is_ck" : false,
+
+      "emotions" : {
+        "neutral"   : "01_",
+        "angry"     : "05_",
+        "contempt"  : null,
+        "disgust"   : "07_",
+        "fear"      : "04_",
+        "happy"     : "02_",
+        "sad"       : "03_",
+        "surprise"  : "06_"
+      }
+    },
+
+    "jaffe" : {
+      "dir" : "/home/hsneto/Documents/datasets/jaffe/",
+      "multiple_folder" : false,
+      "is_ck" : false,
+
+      "emotions" : {
+        "neutral"   : ".NE",
+        "angry"     : ".AN",
+        "contempt"  : null, 
+        "disgust"   : ".DI",
+        "fear"      : ".FE",
+        "happy"     : ".HA",
+        "sad"       : ".SA",
+        "surprise"  : ".SU"
+      }
+    },
+
+    "ck" : {
+      "dir" : "/home/hsneto/Documents/datasets/ck/CK+/extended-cohn-kanade-images/cohn-kanade-images/",
+      "label_dir" : "/home/hsneto/Documents/datasets/ck/CK+/Emotion_labels/Emotion/",
+      "multiple_folder" : true,
+      "is_ck" : true,
+
+      "emotions" : {
+        "neutral"   : "0",
+        "angry"     : "1",
+        "contempt"  : "2",
+        "disgust"   : "3",
+        "fear"      : "4",
+        "happy"     : "5",
+        "sad"       : "6",
+        "surprise"  : "7"
+      }
+    }
+  }
+}
