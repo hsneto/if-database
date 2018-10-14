@@ -9,9 +9,9 @@
 3. Inform the facial expression to be played.
     * Repeat 3x
 
-4. Provide examples (of [well-established bases](options.json)) of the facial expressions proposed.
+4. Provide examples (of [well-established bases](dataset-display/options.json)) of the facial expressions proposed.
     * Repeat 3x
-    * [```display.py```](display.py)
+    * [```display.py```](dataset-display/display.py)
 
 ## Data label:
 
