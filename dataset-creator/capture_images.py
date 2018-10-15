@@ -7,10 +7,8 @@ import utils
 import shutil
 import argparse
 import numpy as np
-from time import time
 from is_msgs.image_pb2 import Image
 from datetime import datetime as DT
-from subprocess import Popen, PIPE, STDOUT
 from collections import defaultdict
 from is_wire.core import Channel, Subscription, Message, Logger
 
@@ -68,6 +66,8 @@ parser.add_argument(
     '--subject', '-s', type=str, required=True, help='ID to identity subject')
 parser.add_argument(
     '--label', '-l', type=str, required=True, help='ID to identity label category')
+parser.add_argument(
+    '--foldername', '-f', type=str, required=False, help='Add an extra folder to organize the data')
 args = parser.parse_args()
 
 exp = args.exp
@@ -86,6 +86,9 @@ elif exp == "signals":
 else:
   log.error("Invalied experiment!")
   sys.exit(-1)
+
+if args.foldername is not None:
+  folder = os.path.join(folder, args.foldername)
 
 labels_folders = utils.get_label_folder(folder, labels)
 # create a folder to store timestamps
