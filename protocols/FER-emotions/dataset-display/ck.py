@@ -84,7 +84,7 @@ def get_json(dataset, delete_file=False):
       data[i].append(filename)
 
   with open("ck.json", "w") as f:
-    json.dump(data, f)
+    json.dump(data, f, indent=2, sort_keys=True)
 
   return data
  

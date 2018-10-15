@@ -1,0 +1,11 @@
+{
+  "broker_uri" : "amqp://localhost:5672",
+  "folder_emotions" : "/home/hsneto/Documents/datasets/if-database/emotions",
+  "folder_signals"  : "/home/hsneto/Documents/datasets/if-database/signals",
+
+  "camera" : {
+      "id" : 0,
+      "width"  : 640,
+      "height" : 480
+  }
+}

@@ -1,10 +1,41 @@
 # IF-Database
 
-**Under development !!!**
+## Protocols
+
+1. **[FER-emotions](protocols/FER-emotions)**
+
+2. **[FER-signals](protocols/FER-signals)**
+
+## Dataset Creator
+
+To publish the images from the [webcam](https://github.com/hsneto/is-webcam), use:
+
+```
+docker container run --rm -d \
+  --device=/dev/video1 \
+  --memory=60M \
+  --network=host \
+  --name is-webcam \
+    hsneto/is-webcam:1.2 \
+    python3 stream.py --device 1 --id 0
+```
+
+To collect data, use [`capture_images.py`](dataset-creator/capture_images.py). 
+
+**Example usage:** To capture data from the [FER-emotions](protocols/FER-emotions) experiment:
+    * subject 0;
+    * label ["happy"](dataset-creator/labels.json).
+
+```
+python3 dataset-creator/capture_images.py \
+  --exp emotions \
+  --subject 0 \
+  --label 5
+```
 
 ## General Information on the projects:
 
-1. Research and Responsibilities:
+1. **Research and Responsibilities:**
 
 | Code 	|                   Project                   	| Students in charge 	|
 |:----:	|:-------------------------------------------:	|:------------------:	|
@@ -16,7 +47,7 @@
 |  C1  	|            Collect body gestures            	|   Felippe (UFES)   	|
 
 
-2. Classroom and schedule:
+2. **Classroom and schedule:**
 
 | Code 	| Classroom 	|                  Schedules                  	| Duration (min.) 	|
 |:----:	|:---------:	|:-------------------------------------------:	|:---------------:	|

@@ -1,0 +1,24 @@
+{
+  "emotions" : {
+    "0" : "neutral",
+    "1" : "angry",
+    "2" : "contempt",
+    "3" : "disgust",
+    "4" : "fear",
+    "5" : "happy",
+    "6" : "sad",
+    "7" : "surprise"
+  },
+
+  "signals" : {
+    "0" : "neutral",
+    "1" : "blink",
+    "2" : "mouth",
+    "3" : "cheeks",
+    "4" : "tongue",
+    "5" : "kiss",
+    "6" : "eyebrows_up",
+    "7" : "eyebrows_down",
+    "8" : "wrinkle"      
+  }
+}
