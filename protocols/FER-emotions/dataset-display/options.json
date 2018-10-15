@@ -6,7 +6,7 @@
 
   "datasets": {
     "ce" : {
-      "dir" : "/home/hsneto/Documents/datasets/ce/ce_database/Identities/",
+      "dir" : "/home/hsneto/Documents/datasets/ce/Identities/",
       "multiple_folder" : true,
       "is_ck" : false,
 
@@ -23,7 +23,7 @@
     },
 
     "jaffe" : {
-      "dir" : "/home/hsneto/Documents/datasets/jaffe/",
+      "dir" : "/home/hsneto/Documents/datasets/jaffe/identities",
       "multiple_folder" : false,
       "is_ck" : false,
 

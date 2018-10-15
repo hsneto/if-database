@@ -1,11 +1,128 @@
 {
-  "broker_uri" : "amqp://localhost:5672",
+  "broker_uri" : "amqp://localhost/5672",
   "folder_emotions" : "/home/hsneto/Documents/datasets/if-database/emotions",
   "folder_signals"  : "/home/hsneto/Documents/datasets/if-database/signals",
+  "folder_gestures" : "/home/hsneto/Documents/datasets/if-database/gestures",
+  "folder_adl"      : "/home/hsneto/Documents/datasets/if-database/adl",
+  "folder_falls"    : "/home/hsneto/Documents/datasets/if-database/falls",
 
-  "camera" : {
-      "id" : 0,
+  "webcam" : {
+      "id" : 4,
       "width"  : 640,
       "height" : 480
-  }
+  },
+
+  "cameras": [
+    {
+      "id": 0,
+      "config": {
+        "sampling": {
+          "frequency": 10.0
+        },
+        "image": {
+          "resolution": {
+            "width": 1288,
+            "height": 728
+          },
+          "color_space": {
+            "value": "RGB"
+          },
+          "format": {
+            "format": "JPEG",
+            "compression": 0.9
+          }
+        },
+        "camera": {
+          "shutter": {
+            "ratio": 0.2,
+            "automatic": false
+          }
+        }
+      }
+    },
+
+    {
+      "id": 1,
+      "config": {
+        "sampling": {
+          "frequency": 10.0
+        },
+        "image": {
+          "resolution": {
+            "width": 1288,
+            "height": 728
+          },
+          "color_space": {
+            "value": "RGB"
+          },
+          "format": {
+            "format": "JPEG",
+            "compression": 0.9
+          }
+        },
+        "camera": {
+          "shutter": {
+            "ratio": 0.2,
+            "automatic": false
+          }
+        }
+      }
+    },
+
+    {
+      "id": 2,
+      "config": {
+        "sampling": {
+          "frequency": 10.0
+        },
+        "image": {
+          "resolution": {
+            "width": 1288,
+            "height": 728
+          },
+          "color_space": {
+            "value": "RGB"
+          },
+          "format": {
+            "format": "JPEG",
+            "compression": 0.9
+          }
+        },
+        "camera": {
+          "shutter": {
+            "ratio": 0.2,
+            "automatic": false
+          }
+        }
+      }
+    },
+
+    {
+      "id": 3,
+      "config": {
+        "sampling": {
+          "frequency": 10.0
+        },
+        "image": {
+          "resolution": {
+            "width": 1288,
+            "height": 728
+          },
+          "color_space": {
+            "value": "RGB"
+          },
+          "format": {
+            "format": "JPEG",
+            "compression": 0.9
+          }
+        },
+        "camera": {
+          "shutter": {
+            "ratio": 0.2,
+            "automatic": false
+          }
+        }
+      }
+    }
+  ]
 }

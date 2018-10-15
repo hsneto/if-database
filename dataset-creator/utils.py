@@ -2,12 +2,13 @@ import os
 import json
 from collections import namedtuple
 
-def load_options(**kwargs):
+def load_options(device, **kwargs):
   """
   Load options about display output and datasets.
 
   Args:
-    - op = options.json file path
+    - device: "webcam" or "cameras"
+    - op: options.json file path
 
   Returns:
     - op: options informations
@@ -27,10 +28,17 @@ def load_options(**kwargs):
 
   op = namedtuple("op", data.keys())(*data.values())
 
-  camera = namedtuple("op", dict(op.camera).keys())(
-    *dict(op.camera).values())
+  if device == "webcam":
+    cameras = namedtuple("op", dict(op.webcam).keys())(
+      *dict(op.webcam).values())
 
-  return op, camera
+  elif device == "cameras":
+    cameras = []
+    for i in op.cameras:
+      cameras.append(namedtuple("op", i.keys())(
+        *i.values()))
+
+  return op, cameras
 
 
 def load_labels(exp, **kwargs):

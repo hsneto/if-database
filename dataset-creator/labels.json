@@ -20,5 +20,35 @@
     "6" : "eyebrows_up",
     "7" : "eyebrows_down",
     "8" : "wrinkle"      
+  },
+
+  "gestures" : {
+    "0"  : "ask_for_help",
+    "1"  : "come_here",
+    "2"  : "leave",
+    "3"  : "follow",
+    "4"  : "stop",
+    "5"  : "abort",
+    "6"  : "good",
+    "7"  : "bad",
+    "8"  : "no",
+    "9"  : "give_way",
+    "10" : "pointing",
+    "11" : "doubt",
+    "12" : "higher",
+    "13" : "lower",
+    "14" : "silence"
+  },
+
+  "adl" : {
+    "0" : "walk",
+    "1" : "stand"
+  },
+
+  "falls" : {
+    "0" : "foward",
+    "1" : "backwards",
+    "2" : "lateral",
+    "3" : "rising"
   }
 }

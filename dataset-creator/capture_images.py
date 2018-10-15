@@ -22,6 +22,14 @@ def get_id(topic):
     return int(match.group(1))
 
 
+def place_images(output_image, images):
+  w, h = images[0].shape[1], images[0].shape[0]
+  output_image[0:h, 0:w, :] = images[0]
+  output_image[0:h, w:2 * w, :] = images[1]
+  output_image[h:2 * h, 0:w, :] = images[2]
+  output_image[h:2 * h, w:2 * w, :] = images[3]
+
+
 def draw_info_bar(image, text, x, y,
                   background_color=(0, 0, 0),
                   text_color=(255, 255, 255),
@@ -58,39 +66,55 @@ def draw_info_bar(image, text, x, y,
     thickness=thickness)
 
 parser = argparse.ArgumentParser(
-    description='Utility to capture a sequence of images a single camera'
+    description='Utility to capture a sequence of images a multiple cameras or webcam'
 )
 parser.add_argument(
-    '--exp', '-e', type=str, required=True, help='Experiment: "emotions" or "signals"')
+    '--exp', '-e', type=str, required=True, help='Experiment tag')
 parser.add_argument(
     '--subject', '-s', type=str, required=True, help='ID to identity subject')
 parser.add_argument(
     '--label', '-l', type=str, required=True, help='ID to identity label category')
 parser.add_argument(
     '--foldername', '-f', type=str, required=False, help='Add an extra folder to organize the data')
+parser.add_argument(
+    '--device', '-d', type=str, required=False, default="cameras", help='Device use to collect data. It can be either "webcam" or "cameras"')    
 args = parser.parse_args()
 
+# pass args
 exp = args.exp
 subject_id = args.subject
 label_id = args.label
+device = args.device
 
-op, cam = utils.load_options()
+# load camera info --> options.json
+op, cam = utils.load_options(device)
+# load experiment labels --> labels.json
 labels = utils.load_labels(exp)
 
 log = Logger(name="Capture")
 
+# get folder to store the collected data
 if exp == "emotions":
   folder = op.folder_emotions
 elif exp == "signals":
   folder = op.folder_signals
+elif exp == "gestures":
+  folder = op.folder_gestures
+elif exp == "adl":
+  folder = op.folder_adl
+elif exp == "falls":
+  folder = op.folder_falls
 else:
-  log.error("Invalied experiment!")
+  log.error("Invalid experiment!")
   sys.exit(-1)
 
+# add new folder
 if args.foldername is not None:
   folder = os.path.join(folder, args.foldername)
 
+# get folder from each possible label
 labels_folders = utils.get_label_folder(folder, labels)
+
 # create a folder to store timestamps
 timestamps_folder = os.path.join(labels_folders[label_id], "timestamps")
 if not os.path.exists(timestamps_folder):
@@ -117,11 +141,30 @@ os.makedirs(sequence_folder)
 
 channel = Channel(op.broker_uri)
 subscription = Subscription(channel)
-subscription.subscribe('CameraGateway.{}.Frame'.format(cam.id))
 
+if device == "webcam":
+  # subscribe to one camera
+  subscription.subscribe('CameraGateway.{}.Frame'.format(cam.id))
+
+elif device == "cameras":
+  # subscribe to multiple cameras
+  for c in cam:
+    subscription.subscribe('CameraGateway.{}.Frame'.format(c.id))
+  
+  # get display image size
+  size = (2 * cam[0].config["image"]["resolution"]["height"],
+          2 * cam[0].config["image"]["resolution"]["width"], 3)
+  # create empty image do display
+  full_image = np.zeros(size, dtype=np.uint8)
+
+else:
+  log.error("Invalid device option")
+  sys.exit(-1)
+
+images_data = {}
 current_timestamps = {}
 timestamps = defaultdict(list)
-# images = {}
+images = {}
 n_sample = 0
 display_rate = 2
 start_save = False
@@ -139,29 +182,31 @@ while True:
   if pb_image is None:
     continue
   data = np.frombuffer(pb_image.data, dtype=np.uint8)
-  current_timestamps[cam.id] = DT.utcfromtimestamp(
+  images_data[topic_id] = data
+  current_timestamps[topic_id] = DT.utcfromtimestamp(
     msg.created_at).isoformat()
 
-  # save images
-  if start_save and not sequence_saved:
-    filename = os.path.join(sequence_folder, "{:02d}_{:03d}_{:08d}.jpeg".format(
-                            int(label_id), int(subject_id), n_sample))
+  if device == "webcam":
+    # save images
+    if start_save and not sequence_saved:
+      filename = os.path.join(sequence_folder, "{:02d}_{:03d}_{:08d}.jpeg".format(
+                              int(label_id), int(subject_id), n_sample))
+      with open(filename, "wb") as f:
+        f.write(images_data[topic_id])
 
-    with open(filename, "wb") as f:
-      f.write(data)
+      timestamps[topic_id].append(current_timestamps[topic_id])
+      n_sample += 1
+      log.info("Sample {} saves", n_sample)
 
-    timestamps[cam.id].append(current_timestamps[cam.id])
-    n_sample += 1
-    log.info("Sample {} saves", n_sample)
+    # display images
+    if n_sample % display_rate == 0:
+      display_image = cv2.imdecode(data, cv2.IMREAD_COLOR)
+      draw_info_bar(display_image, info_bar_text, 50, 50, 
+                      draw_circle=start_save and not sequence_saved)
+      cv2.imshow("", display_image)
 
-  # display images
-  if n_sample % display_rate == 0:
-    img = cv2.imdecode(data, cv2.IMREAD_COLOR)
-    draw_info_bar(img, info_bar_text, 50, 50, 
-                  draw_circle=start_save and not sequence_saved)
+      current_timestamps = {}
 
-    cv2.imshow("", img)
-    
     key = cv2.waitKey(1)
     if key == ord("s"):
       if start_save is False:
@@ -171,11 +216,52 @@ while True:
         with open(timestamps_filename, 'w') as f:
           json.dump(timestamps, f, indent=2, sort_keys=True)
         sequence_saved = True
-
+        
     if key == ord("q"):
       if not start_save or sequence_saved:
         break
 
-  current_timestamps = {}
+  elif device == "cameras":
+    if len(images_data) == len(cam):
+      # save images
+      if start_save and not sequence_saved:
+        for c in cam:
+          filename = os.path.join(sequence_folder, "{:02d}_{:03d}_c{:01d}_{:08d}.jpeg".format(
+                              int(label_id), int(subject_id), c.id, n_sample))
+          with open(filename, "wb") as f:
+            f.write(images_data[c.id])
+
+          timestamps[c.id].append(current_timestamps[c.id])
+        n_sample += 1
+        log.info('Sample {} saved', n_sample)
+
+      # display images
+      if n_sample % display_rate == 0:
+        images = [
+          cv2.imdecode(data, cv2.IMREAD_COLOR)
+          for _, data in images_data.items()
+        ]
+        place_images(full_image, images)
+        display_image = cv2.resize(full_image, (0, 0), fx=0.5, fy=0.5)
+        draw_info_bar(display_image, info_bar_text, 50, 50, 
+                      draw_circle=start_save and not sequence_saved)
+        cv2.imshow("", display_image)
+
+      images_data = {}
+      current_timestamps = {}
+    
+      key = cv2.waitKey(1)
+      if key == ord("s"):
+        if start_save is False:
+          start_save = True
+        elif not sequence_saved:
+          timestamps_filename = os.path.join(timestamps_folder, '{}_timestamps.json'.format(sequence))
+          with open(timestamps_filename, 'w') as f:
+            json.dump(timestamps, f, indent=2, sort_keys=True)
+          sequence_saved = True
+
+      if key == ord("q"):
+        if not start_save or sequence_saved:
+          break
 
 log.info("Exiting")
