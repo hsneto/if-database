@@ -55,6 +55,23 @@
         "sad"       : "6",
         "surprise"  : "7"
       }
+    },
+
+    "kdef" : {
+      "dir" : "/home/hsneto/Documents/datasets/kdef/KDEF_and_AKDEF/KDEF/",
+      "multiple_folder" : true,
+      "is_ck" : false,
+
+      "emotions" : {
+        "neutral"   : "NES.JPG",
+        "angry"     : "ANS.JPG",
+        "contempt"  : null,
+        "disgust"   : "DIS.JPG",
+        "fear"      : "AFS.JPG",
+        "happy"     : "HAS.JPG",
+        "sad"       : "SAS.JPG",
+        "surprise"  : "SUS.JPG"
+      }
     }
   }
 }
