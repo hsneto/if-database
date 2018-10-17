@@ -189,7 +189,7 @@ while True:
   if device == "webcam":
     # save images
     if start_save and not sequence_saved:
-      filename = os.path.join(sequence_folder, "{:02d}_{:03d}_{:08d}.jpeg".format(
+      filename = os.path.join(sequence_folder, "{:02d}_{:03d}_{:05d}.jpeg".format(
                               int(label_id), int(subject_id), n_sample))
       with open(filename, "wb") as f:
         f.write(images_data[topic_id])

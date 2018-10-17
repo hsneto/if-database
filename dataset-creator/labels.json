@@ -42,7 +42,11 @@
 
   "adl" : {
     "0" : "walk",
-    "1" : "stand"
+    "1" : "stand",
+    "2" : "sit",
+    "3" : "lie",
+    "4" : "upstairs",
+    "5" : "downstairs"
   },
 
   "falls" : {
