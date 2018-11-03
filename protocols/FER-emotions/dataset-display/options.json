@@ -6,7 +6,7 @@
 
   "datasets": {
     "ce" : {
-      "dir" : "/home/hsneto/Documents/datasets/ce/Identities/",
+      "dir" : "/media/hsneto/DATABASE/Facial_Expressions/ce/ce_database/Identities/",
       "multiple_folder" : true,
       "is_ck" : false,
 
@@ -23,7 +23,7 @@
     },
 
     "jaffe" : {
-      "dir" : "/home/hsneto/Documents/datasets/jaffe/identities",
+      "dir" : "/media/hsneto/DATABASE/Facial_Expressions/jaffe/",
       "multiple_folder" : false,
       "is_ck" : false,
 
@@ -40,8 +40,8 @@
     },
 
     "ck" : {
-      "dir" : "/home/hsneto/Documents/datasets/ck/CK+/extended-cohn-kanade-images/cohn-kanade-images/",
-      "label_dir" : "/home/hsneto/Documents/datasets/ck/CK+/Emotion_labels/Emotion/",
+      "dir" : "/media/hsneto/DATABASE/Facial_Expressions/ck/CK+/extended-cohn-kanade-images/cohn-kanade-images/",
+      "label_dir" : "/media/hsneto/DATABASE/Facial_Expressions/ck/CK+/Emotion_labels/Emotion/",
       "multiple_folder" : true,
       "is_ck" : true,
 
@@ -58,7 +58,7 @@
     },
 
     "kdef" : {
-      "dir" : "/home/hsneto/Documents/datasets/kdef/KDEF_and_AKDEF/KDEF/",
+      "dir" : "/media/hsneto/DATABASE/Facial_Expressions/kdef/kdef-and-akdef/KDEF/KDEF/",
       "multiple_folder" : true,
       "is_ck" : false,
 

@@ -1,10 +1,10 @@
 {
   "broker_uri" : "amqp://localhost/5672",
-  "folder_emotions" : "/home/hsneto/Documents/datasets/if-database/emotions",
-  "folder_signals"  : "/home/hsneto/Documents/datasets/if-database/signals",
-  "folder_gestures" : "/home/hsneto/Documents/datasets/if-database/gestures",
-  "folder_adl"      : "/home/hsneto/Documents/datasets/if-database/adl",
-  "folder_falls"    : "/home/hsneto/Documents/datasets/if-database/falls",
+  "folder_emotions" : "/media/hsneto/IF-DATABASE/if-database/emotions",
+  "folder_signals"  : "/media/hsneto/IF-DATABASE/if-database/signals",
+  "folder_gestures" : "/media/hsneto/IF-DATABASE/if-database/gestures",
+  "folder_adl"      : "/media/hsneto/IF-DATABASE/if-database/adl",
+  "folder_falls"    : "/media/hsneto/IF-DATABASE/if-database/falls",
 
   "webcam" : {
       "id" : 4,

@@ -41,10 +41,10 @@
   },
 
   "adl" : {
-    "0" : "walk",
+    "0" : "walkiingng",
     "1" : "stand",
-    "2" : "sit",
-    "3" : "lie",
+    "2" : "sitting",
+    "3" : "lying",
     "4" : "upstairs",
     "5" : "downstairs"
   },
