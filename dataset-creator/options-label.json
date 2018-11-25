@@ -1,0 +1,5 @@
+{
+    "src_dir" : "/media/hsneto/IF-DATABASE/if-database/signals/",
+    "dst_dir" : "/media/hsneto/IF-DATABASE/if-database/labeled/signals/",
+    "ignore_folders" : ["timestamps"]
+}
